@@ -1,0 +1,14 @@
+{% extends 'locater/base.html' %}
+
+{% block extrabody %}id="start"{% endblock %}
+
+{% block content %}
+<h1>Find Nearest Locations</h1>
+
+{% for error in errors %}
+<p class="error">{{ error }}</p>
+{% endfor %}
+
+{% include 'locater/form.html' %}
+
+{% endblock %}

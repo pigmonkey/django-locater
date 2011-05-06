@@ -1,0 +1,85 @@
+{% extends 'locater/base.html' %}
+
+{% block title %}Locations Near: {{ search }}{% endblock %}
+
+{% block extrahead %}
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript">
+        function initialize() {
+            var latlng = new google.maps.LatLng({{ lat }}, {{ long }});
+            var myOptions = {
+                zoom: 8,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            {% for location in locations %}
+            var content{{ forloop.counter }} = '<div class="info_window vcard"><h2>'+
+                {% if location.url %}
+                '<a class="fn org url" href="{{ location.url }}">{{ location.name }}</a>'+
+                {% else %}
+                '<span class="fn org">{{ location.name }}</span>'+
+                {% endif %}
+                '</h2><div class="adr">'+
+                '<div class="street-address">{{ location.street_address }}</div>'+
+                '<span class="locality">{{ location.city }}</span>, '+
+                '<span class="region">{{ location.state }}</span> '+
+                '<span class="postal-code">{{ location.zip }}</span>'+
+                '</div>'+
+                '<div class="tel">{{ location.phone }}</div>';
+
+            var marker{{ forloop.counter }} = new google.maps.Marker({
+                position: new google.maps.LatLng({{ location.lat }}, {{ location.long }}),
+                title: "{{ location.name }}",
+            });
+            marker{{ forloop.counter }}.setMap(map);
+
+            google.maps.event.addListener(marker{{ forloop.counter }}, 'click', function() {
+                infowindow.setContent(content{{ forloop.counter }});
+                infowindow.open(map, marker{{ forloop.counter }});
+            });
+            {% endfor %}
+
+            var infowindow = new google.maps.InfoWindow();
+        }
+    </script>
+{% endblock %}
+
+{% block extrabody %} onload="initialize()"{% endblock %}
+
+{% block content %}
+<h1>Locations Near: {{ search }}</h1>
+
+{% include 'locater/form.html' %}
+
+<div id="map_canvas"></div>
+
+<ol id="locations">
+    {% for location in locations %}
+    <li class="vcard">
+        <h2>
+            {% if location.url %}
+            <a class="fn org url" href="{{ location.url }}">{{ location.name }}</a>
+            {% else %}
+            <span class="fn org">{{ location.name }}</span>
+            {% endif %}
+            <span class="distance">({{ location.distance }} miles)</span>
+        </h2>
+
+        <div class="adr">
+            <div class="street-address">{{ location.street_address }}</div>
+            <span class="locality">{{ location.city }}</span>,
+            <span class="region">{{ location.state }}</span>
+            <span class="postal-code">{{ location.zip }}</span>
+        </div>
+
+        <div class="tel">{{ location.phone }}</div>
+    </li>
+    {% endfor %}
+</ol>
+{% endblock %}

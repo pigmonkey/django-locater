@@ -1,0 +1,90 @@
+body {
+    background: #E8E8E8;
+    padding-top: 20px;
+}
+
+body#start {
+    padding-top: 10%;
+}
+
+ul, ol {
+    padding-left: 0;
+}
+
+#start h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 3em;
+}
+
+#start .error {
+    text-align: center;
+}
+
+form ul {
+    list-style: none;
+}
+form ul li {
+    float: left;
+    padding-right: 20px;
+}
+
+form .help {
+    font-style: italic;
+    text-align: center;
+    color: #666;
+}
+
+input[type="submit"] {
+    margin: 0.5em 0;
+}
+
+input, select {
+    color: #3C3C3C;
+    font-size: 1em;
+}
+
+input.location {
+    width: 315px;
+}
+
+#start input, #start select {
+    font-size: 2em;
+}
+
+#start input.location {
+    text-align: center;
+    width: 470px;
+}
+
+#map_canvas {
+    height: 500px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+h2 {
+    margin-bottom: 0;
+}
+
+.adr {
+    margin-bottom: 10px;
+}
+
+.distance {
+    color: #3C3C3C;
+}
+
+#locations {
+    list-style: none;
+}
+
+#locations li {
+    border-left: 10px solid #ccc;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+#locations li:hover {
+    border-left: 10px solid #3C619E;
+}

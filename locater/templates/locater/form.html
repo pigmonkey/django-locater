@@ -1,0 +1,17 @@
+<form action="" method="post">{% csrf_token %}
+    <ul>
+        {% for field in form %}
+        <li>
+            {{ field.errors }}
+            {{ field }}
+            {% if field.help_text %}
+            <div class="help">
+                {{ field.help_text }}
+            </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+        <li><input type="submit" value="Search"></li>
+    </ul>
+</form>
+

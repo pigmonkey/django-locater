@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}Locater{% endblock %}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="{{ STATIC_URL }}print.css" type="text/css" media="print">
+    <!--[if lt IE 8]><link rel="stylesheet" href="{{ MEDIA_URL }}ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+    <script type="text/javascript">
+        function clearText(thefield) {
+            if (thefield.defaultValue==thefield.value)
+                thefield.value = ""
+        }
+    </script>
+
+    {% block extrahead %}{% endblock %}
+
+</head>
+<body lang="en"{% block extrabody %}{% endblock %}>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
